@@ -12,20 +12,27 @@
         .full-height {
             height: 100vh;
         }
+
+        img {
+            max-width: 15rem;
+        }
     </style>
 </head>
 
 <body>
     <div class="d-flex justify-content-center align-items-center full-height">
         <div class="text-center align-items-center">
+            <img src="{{ asset('image\logo-laravel-1024.png') }}" alt="">
             <h1>Selamat Datang</h1>
             <h4 class="mb-4">Pada Tes Teknis <b>Raihan Ahmad Fahrezi</b></h4>
             <div class="row row-cols-1 row-cols-sm-2 align-items-center">
                 <div class="col">
-                    <a type="button" class="btn btn-primary m-2" href="login" title="Soal Kemampuan Teknis">Soal Kemampuan Teknis</a>
+                    <a type="button" class="btn btn-primary m-2" href="login" title="Soal Kemampuan Teknis">Soal
+                        Kemampuan Teknis</a>
                 </div>
                 <div class="col">
-                    <a type="button" class="btn btn-danger m-2" href="#" title="Soal Penalaran">Soal Penalaran</a>
+                    <a type="button" class="btn btn-danger m-2" href="#" title="Soal Penalaran">Soal
+                        Penalaran</a>
                 </div>
             </div>
         </div>
