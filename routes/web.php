@@ -1,20 +1,20 @@
 <?php
 
+use App\Http\Controllers\DataPegawaiController;
+use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/login', function () {
-    return view('soal1.login');
-});
-
 Route::middleware(['guest'])->group(function () {
-    Route::get('/', [IndexController::class, 'index'])->name('user');
-    Route::get('/table', [IndexController::class, 'getDataAjax'])->name('getDataAjax');
+    Route::get('/', function () {
+        return view('welcome');
+    });
 
     Route::post('/login', [LoginController::class, 'store'])->name('login.process');
-    Route::get('/login', [LoginController::class, 'index'])->name('login.login');
+    Route::get('/login', [LoginController::class, 'index'])->name('login');
 });
 
+Route::middleware(['auth'])->group(function () {
+    Route::get('/dashboard', [DataPegawaiController::class, 'index'])->name('dashboard');
+
+    Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+});

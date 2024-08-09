@@ -15,7 +15,7 @@ class LoginController extends Controller
      */
     public function index()
     {
-        return view('login.login');
+        return view('soal1.login');
     }
 
     /**
@@ -32,38 +32,55 @@ class LoginController extends Controller
     public function store(Request $request)
     {
         $messages = [
-            'username.required'     => 'Username tidak boleh kosong!',
-            'username.unique'       => 'Username sudah digunakan!',
+            'username.required'     => 'Username atau Email tidak boleh kosong!',
             'password.required'     => 'Password tidak boleh kosong!',
-            'password.min'          => 'Password minimal 12 karakter!',
-            'password.regex'        => 'Password harus terdiri dari setidaknya Huruf Kapital, Huruf Kecil, Angka, Simbol, dan minimal 12 karakter.',
         ];
 
         $validateData = $request->validate([
             'username' => 'required',
-            'password' => 'required|min:12|regex:/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{12,}$/',
+            'password' => 'required',
         ], $messages);
 
-        $login = [
-            'username' => $request->username,
-            'password' => $request->password,
-        ];
+        // $login = [
+        //     'username' => $request->username,
+        //     'password' => $request->password,
+        // ];
+        // Check if input is email or username
+        $fieldType = filter_var($request->username, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
 
-        if (Auth::attempt($login)) {
-            $result = User::where('username', $validateData['username'])->first();
+        // Attempt login with the appropriate field
+        if (Auth::attempt([$fieldType => $validateData['username'], 'password' => $validateData['password']])) {
+            $user = Auth::user();
+
+
+            // if (Auth::attempt($login)) {
+            //     $result = User::where('username', $validateData['username'])->orWhere('email', $validateData['username'])->first();
+
+            // session([
+            //     'username' => $request->username,
+            //     'image' => $result->image,
+            //     'name' => $result->name,
+            //     'role' => $result->role,
+            //     'success' => true
+            // ]);
+            // $pesan = "Anda login sebagai " . Auth::user()->name . " (@" . Auth::user()->username . ")!";
+
+            // Set session data
             session([
-                'username' => $request->username,
-                'image' => $result->image,
-                'name' => $result->name,
-                'role' => $result->role,
+                'username' => $user->username,
+                'image' => $user->image,
+                'name' => $user->name,
+                'role' => $user->role,
                 'success' => true
             ]);
-            $pesan = "Anda login sebagai " . Auth::user()->name . " (@" . Auth::user()->username . ")!";
+
+            $pesan = "Anda login sebagai " . $user->name . " (@" . $user->username . ")!";
+
             return redirect('/dashboard')->with('pesan', $pesan);
         } else {
             // Menentukan pesan berdasarkan alasan kegagalan login
             $pesan = "Login Gagal. ";
-            if (User::where('username', $validateData['username'])->exists()) {
+            if (User::where('username', $validateData['username'])->orWhere('email', $validateData['username'])->exists()) {
                 // Jika username benar, tapi password salah
                 $pesan .= "Password yang Anda masukkan salah.";
             } else {
@@ -78,7 +95,6 @@ class LoginController extends Controller
 
     public function logout()
     {
-        // session(['success' => true])->forget(['username', 'password', 'image', 'role', 'nama', 'success']);
         Auth::logout();
         // Hapus semua session
         Session::flush();

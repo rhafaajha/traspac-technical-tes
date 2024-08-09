@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 
 <head>
     <meta charset="UTF-8">
@@ -23,7 +23,7 @@
     <div class="d-flex justify-content-center align-items-center full-height">
         <div class="card p-4" style="width: 300px;">
             <h3 class="text-center mb-4">Login</h3>
-            <form method="POST" action="#">
+            <form method="POST" action="{{ route('login.process') }}">
                 @csrf
                 <div class="form-group">
                     <label for="username">Username atau Email</label>
@@ -39,6 +39,23 @@
             </form>
         </div>
     </div>
+
+    <!-- Toast -->
+    @if (session()->has('pesan'))
+        @php
+            $toastClass = session()->get('success') == true ? 'text-bg-primary' : 'text-bg-danger';
+        @endphp
+        <div class="toast align-items-center {{ $toastClass }}" role="alert" aria-live="assertive"
+            aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body">
+                    {{ session()->get('pesan') }}
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+                    aria-label="Close"></button>
+            </div>
+        </div>
+    @endif
 
     <!-- Tambahkan Bootstrap JS dan dependensi lainnya jika perlu -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

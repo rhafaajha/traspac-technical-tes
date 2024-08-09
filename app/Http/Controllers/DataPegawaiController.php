@@ -13,7 +13,7 @@ class DataPegawaiController extends Controller
      */
     public function index()
     {
-        //
+        return view('soal1.data.index');
     }
 
     /**

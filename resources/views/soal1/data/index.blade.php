@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="id">
 
 <head>
     <meta charset="utf-8" />
@@ -26,6 +26,27 @@
 </head>
 
 <body class="user">
+    <!-- ======= Header ======= -->
+    <header id="header" class="header fixed-top d-flex align-items-center">
+        <div class="container-logo d-flex align-items-center justify-content-between">
+            <a href="{{ route('dashboard') }}" class="logo d-flex align-items-center">
+                <img src="{{ asset('image/logo-laravel-1024.png') }}" alt="" />
+            </a>
+        </div>
+        <!-- End Logo -->
+
+        <nav class="header-nav ms-auto">
+            <form action="{{ route('logout') }}" method="GET">
+                @csrf
+                <button type="submit" class="btn btn-primary" id="Logout" title="Logout from your Account">
+                    <i class="bi bi-box-arrow-in-left"></i>&nbsp;&nbsp;Logout
+                </button>
+            </form>
+        </nav>
+        <!-- End Icons Navigation -->
+    </header>
+    <!-- End Header -->
+
     <!-- ======= MAIN ======= -->
     <main id="main-user" class="main user">
         <section class="section user">
@@ -74,6 +95,23 @@
     </main>
     <!-- End #main -->
 
+    <!-- Toast -->
+    @if (session()->has('pesan'))
+        @php
+            $toastClass = session()->get('success') == true ? 'text-bg-primary' : 'text-bg-danger';
+        @endphp
+        <div class="toast align-items-center {{ $toastClass }}" role="alert" aria-live="assertive"
+            aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body">
+                    {{ session()->get('pesan') }}
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+                    aria-label="Close"></button>
+            </div>
+        </div>
+    @endif
+
     <!-- jQuery -->
     {{-- <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script> --}}
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
@@ -104,7 +142,7 @@
     <!-- Template Main JS File -->
     <script src="{{ asset('js/main.js') }}"></script>
 
-    <script type="text/javascript">
+    {{-- <script type="text/javascript">
         function formatDate(date) {
             var year = date.getFullYear();
             var month = (1 + date.getMonth()).toString().padStart(2, '0');
@@ -455,7 +493,7 @@
                 });
             }, 30000);
         });
-    </script>
+    </script> --}}
 </body>
 
 </html>
