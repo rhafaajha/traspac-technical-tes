@@ -11,10 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('unit_kerja', function (Blueprint $table) {
+        Schema::create('eselons', function (Blueprint $table) {
             $table->id()->primary();
-            $table->longText('tempat_tugas')->index();
-            $table->longText('unit_kerja')->index();
+            $table->string('kode')->index();
             $table->timestamps();
         });
     }
@@ -24,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('unit_kerja');
+        Schema::dropIfExists('eselons');
     }
 };

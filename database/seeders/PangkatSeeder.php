@@ -16,7 +16,7 @@ class PangkatSeeder extends Seeder
         $now = now();
 
         $data = [
-            'golongan' => [
+            'golongans' => [
                 ['kode' => 'I/a', 'nama_pangkat' => 'Juru Muda'],
                 ['kode' => 'I/b', 'nama_pangkat' => 'Juru Muda Tingkat I'],
                 ['kode' => 'I/c', 'nama_pangkat' => 'Juru'],
@@ -35,7 +35,7 @@ class PangkatSeeder extends Seeder
                 ['kode' => 'IV/d', 'nama_pangkat' => 'Pembina Utama Madya'],
                 ['kode' => 'IV/e', 'nama_pangkat' => 'Pembina Utama'],
             ],
-            'eselon' => [
+            'jabatans' => [
                 ['kode' => 'I', 'jabatan' => 'Ketua'],
                 ['kode' => 'I', 'jabatan' => 'Sekretaris Jenderal (Sekjen)'],
                 ['kode' => 'I', 'jabatan' => 'Inspektur Jenderal (Irjen)'],
@@ -51,6 +51,12 @@ class PangkatSeeder extends Seeder
                 ['kode' => 'III', 'jabatan' => 'Kepala UPT'],
                 ['kode' => 'IV', 'jabatan' => 'Kepala Sub Bagian'],
                 ['kode' => 'IV', 'jabatan' => 'Kepala Seksi'],
+            ],
+            'eselons' => [
+                ['kode' => 'I'],
+                ['kode' => 'II'],
+                ['kode' => 'III'],
+                ['kode' => 'IV'],
             ],
         ];
 

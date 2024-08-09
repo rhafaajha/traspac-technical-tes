@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Agama;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -29,6 +30,7 @@ class AgamaSeeder extends Seeder
             $item['updated_at'] = $now;
         }
 
-        DB::table('agama')->insert($agama);
+        // DB::table('agamas')->insert($agama);
+        Agama::insert($agama);
     }
 }

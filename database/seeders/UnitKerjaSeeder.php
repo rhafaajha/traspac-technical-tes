@@ -76,6 +76,6 @@ class UnitKerjaSeeder extends Seeder
             $item['updated_at'] = $now;
         }
 
-        DB::table('unit_kerja')->insert($data);
+        DB::table('unit_kerjas')->insert($data);
     }
 }

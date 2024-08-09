@@ -13,7 +13,7 @@ class ArtikelSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('artikel')->insert([
+        DB::table('artikels')->insert([
             'created_at' => now(),
             'updated_at' => now(),
             'judul' => 'Program SISKO',
