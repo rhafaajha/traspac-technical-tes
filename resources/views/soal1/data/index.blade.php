@@ -5,16 +5,10 @@
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 
-    <title>FFM Bot</title>
+    <title>Data Pegawai PNS</title>
 
     <meta content="" name="description" />
     <meta content="" name="keywords" />
-
-    <!-- Google Fonts -->
-    <link href="https://fonts.gstatic.com" rel="preconnect" />
-    <link
-        href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet" />
 
     <!-- Vendor CSS Files -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
@@ -23,6 +17,9 @@
     <link rel="stylesheet" type="text/css"
         href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css" />
+
+    <!-- Template Main CSS File -->
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet" />
 </head>
 
 <body class="user">
@@ -30,11 +27,10 @@
     <header id="header" class="header fixed-top d-flex align-items-center">
         <div class="container-logo d-flex align-items-center justify-content-between">
             <a href="{{ route('dashboard') }}" class="logo d-flex align-items-center">
-                <img src="{{ asset('image/logo-laravel-1024.png') }}" alt="" />
+                <span class="d-none d-lg-block">Data Pegawai PNS</span>
             </a>
         </div>
         <!-- End Logo -->
-
         <nav class="header-nav ms-auto">
             <form action="{{ route('logout') }}" method="GET">
                 @csrf
@@ -55,8 +51,6 @@
                 <div class="col">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Status Order<span> | Solving All Data</span></h5>
-
                             <!-- Table Data -->
                             <div class="table-responsive">
                                 <table class="table datatable table-hover align-middle" id="dataUser"
@@ -64,24 +58,21 @@
                                     <thead class="table-dark">
                                         <tr>
                                             <th scope="col">No</th>
-                                            <th scope="col">Timestamp</th>
-                                            <th scope="col">Tiket FFM</th>
-                                            <th scope="col">Username</th>
-                                            <th scope="col">Nama Pelapor</th>
-                                            <th scope="col">Layanan</th>
-                                            <th scope="col">Datel</th>
-                                            <th scope="col">Order-ID</th>
-                                            <th scope="col">Tipe Order</th>
-                                            <th scope="col">Unit</th>
-                                            <th scope="col">Keterangan Lengkap</th>
-                                            <th scope="col">PIC</th>
-                                            <th scope="col">Leason Learned</th>
-                                            <th scope="col">Status</th>
-                                            <th scope="col">Timestamp Hasil</th>
-                                            <th scope="col">PIC Eskalasi</th>
-                                            <th scope="col">Leason Learned Eskalasi</th>
-                                            <th scope="col">Status Eskalasi</th>
-                                            <th scope="col">Timestamp Eskalasi</th>
+                                            <th scope="col">NIP</th>
+                                            <th scope="col">Nama</th>
+                                            <th scope="col">Tempat Lahir</th>
+                                            <th scope="col">Alamat</th>
+                                            <th scope="col">Tanggal Lahir</th>
+                                            <th scope="col">L/P</th>
+                                            <th scope="col">Gol</th>
+                                            <th scope="col">Eselon</th>
+                                            <th scope="col">Jabatan</th>
+                                            <th scope="col">Tempat Tugas</th>
+                                            <th scope="col">Agama</th>
+                                            <th scope="col">Unit Kerja</th>
+                                            <th scope="col">No. HP</th>
+                                            <th scope="col">NPWP</th>
+                                            <th scope="col">Aksi</th>
                                         </tr>
                                     </thead>
                                 </table>
@@ -113,13 +104,8 @@
     @endif
 
     <!-- jQuery -->
-    {{-- <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script> --}}
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-
-    <!-- Chart -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 
     <!-- Bootstrap Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
