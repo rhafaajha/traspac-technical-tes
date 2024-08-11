@@ -51,7 +51,7 @@ class DataPegawaiController extends Controller
         try {
             // Validasi input
             $validatedData = $request->validate([
-                'inputNIP' => 'required|integer|unique:data_pegawais,nip',
+                'inputNIP' => 'required|unique:data_pegawais,nip',
                 'inputNama' => 'required|string|max:255',
                 'inputTempatLahir' => 'required|string|max:255',
                 'inputTanggalLahir' => 'required|date',
@@ -64,7 +64,7 @@ class DataPegawaiController extends Controller
                 'inputAgama' => 'required|exists:agamas,id',
                 'inputUnitKerja' => 'nullable|exists:unit_kerjas,id',
                 'inputNoHP' => 'nullable|string|max:15',
-                'inputNPWP' => 'nullable|integer',
+                'inputNPWP' => 'nullable',
                 'inputFoto' => 'nullable|image|mimes:jpeg,png,jpg|max:10240',
             ]);
 

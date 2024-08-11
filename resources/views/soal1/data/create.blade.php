@@ -105,7 +105,7 @@
                                         Lahir</label>
                                     <div class="col">
                                         <input type="date" id="inputTanggalLahir" name="inputTanggalLahir"
-                                            class="form-control" required value="{{ old('inputTanggalLahir') }}" />
+                                            class="form-control" value="{{ old('inputTanggalLahir') }}" required />
                                         <div class="invalid-feedback"> Harap masukkan tanggal lahir. </div>
                                         @error('inputTanggalLahir')
                                             <div class="text-danger">{{ $message }}</div>
