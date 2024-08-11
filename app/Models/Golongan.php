@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Golongan extends Model
 {
     use HasFactory;
+
+    protected $table = 'golongans';
+
+    public function dataPegawais()
+    {
+        return $this->hasMany(DataPegawai::class, 'golongan_id');
+    }
 }

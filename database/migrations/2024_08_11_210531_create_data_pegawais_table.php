@@ -21,12 +21,12 @@ return new class extends Migration
             $table->date('tanggal_lahir');
             $table->longText('alamat');
             $table->enum('jk', ['L', 'P']);
-            $table->foreignId('golongan');
-            $table->foreignId('eselon')->nullable();
-            $table->foreignId('jabatan')->nullable();
-            $table->foreignId('tempat_tugas')->nullable();
-            $table->foreignId('agama');
-            $table->foreignId('unit_kerja')->nullable();
+            $table->foreignId('golongan_id')->constrained('golongans')->onDelete('cascade');
+            $table->foreignId('eselon_id')->nullable()->constrained('eselons')->onDelete('cascade');
+            $table->foreignId('jabatan_id')->nullable()->constrained('jabatans')->onDelete('cascade');
+            $table->foreignId('tempat_tugas_id')->nullable()->constrained('unit_kerjas')->onDelete('cascade');
+            $table->foreignId('agama_id')->constrained('agamas')->onDelete('cascade');
+            $table->foreignId('unit_kerja_id')->nullable()->constrained('unit_kerjas')->onDelete('cascade');
             $table->string('no_hp')->nullable();
             $table->string('npwp')->nullable();
         });

@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 
-    <title>Update Data Pegawai PNS</title>
+    <title>Tambah Data Pegawai PNS</title>
 
     <meta content="" name="description" />
     <meta content="" name="keywords" />
@@ -52,13 +52,12 @@
                                 <a href="{{ route('dashboard') }}">
                                     <i class="bi bi-arrow-left-circle"></i>
                                 </a>
-                                &nbsp;&nbsp;Perbarui Data Pegawai
+                                &nbsp;&nbsp;Tambah Data Pegawai
                             </h5>
 
                             <!-- General Form Elements -->
-                            <form action="{{ route('update', $dataPegawai->id) }}" method="POST"
-                                enctype="multipart/form-data" id="formDaftar" class="needs-validation" novalidate>
-                                @method('PATCH')
+                            <form action="{{ route('tambahdata.store') }}" method="POST" enctype="multipart/form-data"
+                                id="formDaftar" class="needs-validation" novalidate>
                                 @csrf
 
                                 <div class="row mb-3">
@@ -66,8 +65,7 @@
                                     <label for="inputNIP" class="col-sm-1 col-form-label form-label">NIP</label>
                                     <div class="col">
                                         <input type="number" id="inputNIP" name="inputNIP" class="form-control"
-                                            placeholder="Masukkan NIP" required
-                                            value="{{ old('inputNIP') ?? $dataPegawai->nip }}" />
+                                            placeholder="Masukkan NIP" required value="{{ old('inputNIP') }}" />
                                         <div class="invalid-feedback"> Harap masukkan NIP. </div>
                                         @error('inputNIP')
                                             <div class="text-danger">{{ $message }}</div>
@@ -80,8 +78,7 @@
                                     <label for="inputNama" class="col-sm-1 col-form-label form-label">Nama</label>
                                     <div class="col">
                                         <input type="text" id="inputNama" name="inputNama" class="form-control"
-                                            placeholder="Masukkan Nama" required
-                                            value="{{ old('inputNama') ?? $dataPegawai->nama }}" />
+                                            placeholder="Masukkan Nama" required value="{{ old('inputNama') }}" />
                                         <div class="invalid-feedback"> Harap masukkan nama. </div>
                                         @error('inputNama')
                                             <div class="text-danger">{{ $message }}</div>
@@ -96,7 +93,7 @@
                                     <div class="col">
                                         <input type="text" id="inputTempatLahir" name="inputTempatLahir"
                                             class="form-control" placeholder="Masukkan Tempat Lahir" required
-                                            value="{{ old('inputTempatLahir') ?? $dataPegawai->tempat_lahir }}" />
+                                            value="{{ old('inputTempatLahir') }}" />
                                         <div class="invalid-feedback"> Harap masukkan tempat lahir. </div>
                                         @error('inputTempatLahir')
                                             <div class="text-danger">{{ $message }}</div>
@@ -108,8 +105,7 @@
                                         Lahir</label>
                                     <div class="col">
                                         <input type="date" id="inputTanggalLahir" name="inputTanggalLahir"
-                                            class="form-control" required
-                                            value="{{ old('inputTanggalLahir') ?? $dataPegawai->tanggal_lahir }}" />
+                                            class="form-control" required value="{{ old('inputTanggalLahir') }}" />
                                         <div class="invalid-feedback"> Harap masukkan tanggal lahir. </div>
                                         @error('inputTanggalLahir')
                                             <div class="text-danger">{{ $message }}</div>
@@ -121,7 +117,7 @@
                                     <!-- Alamat -->
                                     <label for="inputAlamat" class="col-sm-1 col-form-label form-label">Alamat</label>
                                     <div class="col">
-                                        <textarea id="inputAlamat" name="inputAlamat" class="form-control" placeholder="Masukkan Alamat" required>{{ old('inputAlamat') ?? $dataPegawai->alamat }}</textarea>
+                                        <textarea id="inputAlamat" name="inputAlamat" class="form-control" placeholder="Masukkan Alamat" required>{{ old('inputAlamat') }}</textarea>
                                         <div class="invalid-feedback"> Harap masukkan alamat. </div>
                                         @error('inputAlamat')
                                             <div class="text-danger">{{ $message }}</div>
@@ -136,13 +132,13 @@
                                             <div class="form-check form-check-inline">
                                                 <input class="form-check-input" type="radio" name="inputGender"
                                                     id="inlineRadio1" value="L"
-                                                    {{ old('inputGender') ?? $dataPegawai->jk == 'L' ? 'checked' : '' }}>
+                                                    {{ old('inputGender') == 'L' ? 'checked' : '' }}>
                                                 <label class="form-check-label" for="inlineRadio1">Laki-Laki</label>
                                             </div>
                                             <div class="form-check form-check-inline">
                                                 <input class="form-check-input" type="radio" name="inputGender"
                                                     id="inlineRadio2" value="P"
-                                                    {{ old('inputGender') ?? $dataPegawai->jk == 'P' ? 'checked' : '' }}>
+                                                    {{ old('inputGender') == 'P' ? 'checked' : '' }}>
                                                 <label class="form-check-label" for="inlineRadio2">Perempuan</label>
                                             </div>
                                         </div>
@@ -164,7 +160,7 @@
                                                 disabled>Pilih Golongan</option>
                                             @foreach ($golongans as $golongan)
                                                 <option value="{{ $golongan->id }}"
-                                                    {{ old('inputGolongan') ?? $dataPegawai->golongan_id == $golongan->id ? 'selected' : '' }}>
+                                                    {{ old('inputGolongan') == $golongan->id ? 'selected' : '' }}>
                                                     {{ $golongan->kode }}</option>
                                             @endforeach
                                         </select>
@@ -183,7 +179,7 @@
                                                 disabled>Pilih Eselon</option>
                                             @foreach ($eselons as $eselon)
                                                 <option value="{{ $eselon->id }}"
-                                                    {{ old('inputEselon') ?? $dataPegawai->eselon_id == $eselon->id ? 'selected' : '' }}>
+                                                    {{ old('inputEselon') == $eselon->id ? 'selected' : '' }}>
                                                     {{ $eselon->kode }}</option>
                                             @endforeach
                                         </select>
@@ -205,7 +201,7 @@
                                                 disabled>Pilih Jabatan</option>
                                             @foreach ($jabatans as $jabatan)
                                                 <option value="{{ $jabatan->id }}"
-                                                    {{ old('inputJabatan') ?? $dataPegawai->jabatan_id == $jabatan->id ? 'selected' : '' }}>
+                                                    {{ old('inputJabatan') == $jabatan->id ? 'selected' : '' }}>
                                                     {{ $jabatan->jabatan }}</option>
                                             @endforeach
                                         </select>
@@ -226,7 +222,7 @@
                                                 Tempat Tugas</option>
                                             @foreach ($tempatTugas as $tempat)
                                                 <option value="{{ $tempat->id }}"
-                                                    {{ old('inputTempatTugas') ?? $dataPegawai->tempat_tugas_id == $tempat->id ? 'selected' : '' }}>
+                                                    {{ old('inputTempatTugas') == $tempat->id ? 'selected' : '' }}>
                                                     {{ $tempat->tempat_tugas }}</option>
                                             @endforeach
                                         </select>
@@ -247,7 +243,7 @@
                                                 disabled>Pilih Agama</option>
                                             @foreach ($agamas as $agama)
                                                 <option value="{{ $agama->id }}"
-                                                    {{ old('inputAgama') ?? $dataPegawai->agama_id == $agama->id ? 'selected' : '' }}>
+                                                    {{ old('inputAgama') == $agama->id ? 'selected' : '' }}>
                                                     {{ $agama->nama_agama }}</option>
                                             @endforeach
                                         </select>
@@ -267,7 +263,7 @@
                                                 disabled>Pilih Unit Kerja</option>
                                             @foreach ($unitKerjas as $unitKerja)
                                                 <option value="{{ $unitKerja->id }}"
-                                                    {{ old('inputUnitKerja') ?? $dataPegawai->unit_kerja_id == $unitKerja->id ? 'selected' : '' }}>
+                                                    {{ old('inputUnitKerja') == $unitKerja->id ? 'selected' : '' }}>
                                                     {{ $unitKerja->unit_kerja }}</option>
                                             @endforeach
                                         </select>
@@ -284,7 +280,7 @@
                                     <div class="col">
                                         <input type="tel" id="inputNoHP" name="inputNoHP" class="form-control"
                                             placeholder="Masukkan Nomor HP" required
-                                            value="{{ old('inputNoHP') ?? $dataPegawai->no_hp }}" />
+                                            value="{{ old('inputNoHP') }}" />
                                         <div class="invalid-feedback"> Harap masukkan nomor handphone. </div>
                                         @error('inputNoHP')
                                             <div class="text-danger">{{ $message }}</div>
@@ -295,8 +291,7 @@
                                     <label for="inputNPWP" class="col-sm-1 col-form-label form-label">NPWP</label>
                                     <div class="col">
                                         <input type="number" id="inputNPWP" name="inputNPWP" class="form-control"
-                                            placeholder="Masukkan NPWP" required
-                                            value="{{ old('inputNPWP') ?? $dataPegawai->npwp }}" />
+                                            placeholder="Masukkan NPWP" required value="{{ old('inputNPWP') }}" />
                                         <div class="invalid-feedback"> Harap masukkan NPWP. </div>
                                         @error('inputNPWP')
                                             <div class="text-danger">{{ $message }}</div>
@@ -305,20 +300,6 @@
                                 </div>
 
                                 <div class="row mb-3">
-                                    <!-- Display the uploaded photo if it exists -->
-                                    @if ($dataPegawai->foto)
-                                        <div class="col-sm-1">
-                                            <div class="mt-3">
-                                                <label for="inputFoto" class="col col-form-label form-label">Foto
-                                                    Pegawai Sebelumnya</label>
-                                                <img src="{{ asset($dataPegawai->foto) }}" alt="Foto Pegawai"
-                                                    class="img-thumbnail" width="150" style="cursor:pointer;"
-                                                    data-bs-toggle="modal" data-bs-target="#imageModal"
-                                                    data-bs-src="{{ asset($dataPegawai->foto) }}">
-                                            </div>
-                                        </div>
-                                    @endif
-
                                     <label for="inputFoto" class="col-sm-1 col-form-label form-label">Foto
                                         Pegawai</label>
                                     <div class="col">
@@ -336,7 +317,7 @@
                                         <button type="button" name="reset" id="resetForm" class="btn btn-danger"
                                             data-bs-toggle="modal" data-bs-target="#confirmResetModal">Batal</button>
                                         <button type="submit" name="submit" id="submitForm"
-                                            class="btn btn-primary">Update</button>
+                                            class="btn btn-primary">Simpan</button>
                                     </div>
                                 </div>
                             </form>
@@ -386,20 +367,6 @@
         </div>
     </div>
 
-    <!-- Modal Preview Image-->
-    <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="imageModalLabel">Preview Foto</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body text-center">
-                    <img src="" id="imageModalSrc" class="img-fluid" alt="Foto Pegawai">
-                </div>
-            </div>
-        </div>
-    </div>
 
     <!-- jQuery -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>

@@ -34,6 +34,11 @@ h6 {
 /*--------------------------------------------------------------
 # Main
 --------------------------------------------------------------*/
+.highlight {
+    background-color: yellow;
+    font-weight: bold;
+}
+
 #main {
     margin-top: 4rem;
     padding: 20px 30px;

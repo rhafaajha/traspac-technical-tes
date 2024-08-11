@@ -1,52 +1,3 @@
-function previewImage(event) {
-    const image = event.target;
-    const previewimage = document.getElementById('previewimage');
-
-    // Buat FileReader
-    const oFReader = new FileReader();
-
-    // Saat file selesai dibaca, atur src gambar preview
-    oFReader.onload = function (oFREvent) {
-        previewimage.src = oFREvent.target.result;
-        previewimage.style.display = 'block';
-    };
-
-    // Baca file sebagai URL Data
-    if (image.files[0]) {
-        oFReader.readAsDataURL(image.files[0]);
-    }
-};
-
-function previewImageUpdate(event, id) {
-    const file = event.target.files[0];
-    const lihatimage = document.getElementById(`updatepreview-${id}`);
-    const reader = new FileReader();
-
-    reader.onload = function (reader) {
-        lihatimage.src = reader.target.result;
-    };
-
-    if (file) {
-        reader.readAsDataURL(file);
-    }
-};
-
-function removePreviewImage() {
-    const previewimage = document.getElementById('previewimage');
-
-    // Kosongkan src gambar preview
-    URL.revokeObjectURL(previewimage.src);
-    previewimage.src = "/img/person-circle-outline.png";
-}
-
-function removePreviewImageUpdate(id) {
-    const previewimage = document.getElementById('updatepreview-' + id);
-
-    // Kosongkan src gambar preview
-    URL.revokeObjectURL(previewimage.src);
-    previewimage.src = "/img/person-circle-outline.png";
-}
-
 document.addEventListener("DOMContentLoaded", function () {
     const showPassword = document.querySelector('#show-password');
     const password = document.querySelector('#password');
@@ -69,6 +20,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
 $(document).ready(function () {
     $('.toast').toast('show');
+});
+
+const imageModal = document.getElementById('imageModal');
+imageModal.addEventListener('show.bs.modal', function (event) {
+    const button = event.relatedTarget;
+    const imgSrc = button.getAttribute('data-bs-src');
+
+    const modalImage = document.getElementById('imageModalSrc');
+    modalImage.src = imgSrc;
 });
 
 (function () {

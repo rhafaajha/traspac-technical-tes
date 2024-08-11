@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('eselons', function (Blueprint $table) {
-            $table->id()->primary();
+            $table->id();
             $table->string('kode')->index();
             $table->timestamps();
         });

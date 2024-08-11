@@ -41,29 +41,12 @@ class LoginController extends Controller
             'password' => 'required',
         ], $messages);
 
-        // $login = [
-        //     'username' => $request->username,
-        //     'password' => $request->password,
-        // ];
-        // Check if input is email or username
+        // Check email or username
         $fieldType = filter_var($request->username, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
 
         // Attempt login with the appropriate field
         if (Auth::attempt([$fieldType => $validateData['username'], 'password' => $validateData['password']])) {
             $user = Auth::user();
-
-
-            // if (Auth::attempt($login)) {
-            //     $result = User::where('username', $validateData['username'])->orWhere('email', $validateData['username'])->first();
-
-            // session([
-            //     'username' => $request->username,
-            //     'image' => $result->image,
-            //     'name' => $result->name,
-            //     'role' => $result->role,
-            //     'success' => true
-            // ]);
-            // $pesan = "Anda login sebagai " . Auth::user()->name . " (@" . Auth::user()->username . ")!";
 
             // Set session data
             session([
